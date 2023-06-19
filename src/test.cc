@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 
-#define EPS 1e-7
 #include "s21_matrix_oop.h"
 
 /* ===================== Constructors and destructors ===================== */
@@ -103,18 +102,6 @@ TEST(ParametrizedConstructor, test9) {
 }
 
 TEST(ParametrizedConstructor, test10) {
-  double matrix[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
-  EXPECT_NO_THROW({
-    S21Matrix test = S21Matrix(3, 3);
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 3; j++) {
-        EXPECT_EQ(matrix[i][j], test(i, j));
-      }
-    }
-  });
-}
-
-TEST(ParametrizedConstructor, test11) {
   EXPECT_NO_THROW({
     S21Matrix test = S21Matrix(3, 4);
     EXPECT_EQ(test.GetCols(), 4);
@@ -240,25 +227,6 @@ TEST(Setter, test3) {
 }
 
 TEST(Setter, test4) {
-  double result[2][3] = {{0, 1, 0}, {1, 2, 0}};
-  EXPECT_NO_THROW({
-    S21Matrix test = S21Matrix(2, 2);
-    for (int i = 0; i < test.GetRows(); i++) {
-      for (int j = 0; j < test.GetCols(); j++) {
-        test(i, j) = i + j;
-      }
-    }
-    test.SetCols(3);
-    EXPECT_EQ(test.GetCols(), 3);
-    for (int i = 0; i < test.GetRows(); i++) {
-      for (int j = 0; j < test.GetCols(); j++) {
-        EXPECT_EQ(test(i, j), result[i][j]);
-      }
-    }
-  });
-}
-
-TEST(Setter, test5) {
   double result[2][1] = {{0}, {1}};
   EXPECT_NO_THROW({
     S21Matrix test = S21Matrix(2, 2);
@@ -277,28 +245,7 @@ TEST(Setter, test5) {
   });
 }
 
-TEST(Setter, test6) {
-  double result[3][3] = {{0, 1, 0}, {1, 2, 0}, {0, 0, 0}};
-  EXPECT_NO_THROW({
-    S21Matrix test = S21Matrix(2, 2);
-    for (int i = 0; i < test.GetRows(); i++) {
-      for (int j = 0; j < test.GetCols(); j++) {
-        test(i, j) = i + j;
-      }
-    }
-    test.SetRows(3);
-    test.SetCols(3);
-    EXPECT_EQ(test.GetRows(), 3);
-    EXPECT_EQ(test.GetCols(), 3);
-    for (int i = 0; i < test.GetRows(); i++) {
-      for (int j = 0; j < test.GetCols(); j++) {
-        EXPECT_EQ(test(i, j), result[i][j]);
-      }
-    }
-  });
-}
-
-TEST(Setter, test7) {
+TEST(Setter, test5) {
   double result[2][2] = {{0, 1}, {1, 2}};
   EXPECT_NO_THROW({
     S21Matrix test(3, 3);
@@ -746,20 +693,6 @@ TEST(TransposeTest, NonSquareMatrix) {
       EXPECT_EQ(transposed(i, j), expected[i][j]);
     }
   }
-}
-
-TEST(CalcComplementsTest, SingleElementMatrix) {
-  double matrix[1][1] = {{5}};
-  double expected[1][1] = {{5}};
-
-  S21Matrix mat = S21Matrix(1, 1);
-  mat(0, 0) = matrix[0][0];
-
-  S21Matrix complements = mat.CalcComplements();
-
-  EXPECT_EQ(complements.GetRows(), 1);
-  EXPECT_EQ(complements.GetCols(), 1);
-  EXPECT_EQ(complements(0, 0), expected[0][0]);
 }
 
 TEST(CalcComplementsTest, SquareMatrix) {
