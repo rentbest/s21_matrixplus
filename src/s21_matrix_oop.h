@@ -52,13 +52,16 @@ class S21Matrix {
   double** matrix_;
 
   /* ============================== Methods ================================= */
-  void InitMatrix_();
-  void CopyMatrix_(const S21Matrix& other);
-  void ClearMatrix_() noexcept;
-  void FillMatrix_(S21Matrix& newMatrix, int rows, int cols);
-  void ComplementsHelp_(S21Matrix& complements) const;
-  void FindMinor_(S21Matrix& minor, int row, int col) const noexcept;
-  double DetHelp_() const;
+  void InitMatrix();
+  void CopyMatrix(const S21Matrix& other);
+  void ClearMatrix() noexcept;
+  void FillMatrix(S21Matrix& newMatrix, int rows, int cols);
+  void CheckIfSizesAreEqual(const S21Matrix& other) const;
+  void CheckIfSquare() const;
+  void ComplementsHelp(S21Matrix& complements) const;
+  void FindMinor(S21Matrix& minor, int row, int col) const noexcept;
+  double DetHelp() const;
+  void CheckIfIndexExists(int row, int col) const;
 };
 
 #endif  // S21_MATRIX_OOP_H
